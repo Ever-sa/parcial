@@ -1,0 +1,31 @@
+
+version: "3.7"
+services:
+  app:
+    image: ever/adminapp
+    container_name: AdminLTE-app
+    working_dir: /application
+    ports:
+     - "8383:80"
+  mysql:
+    image: mysql:8.0
+    container_name: AdminLTE-mysql
+    working_dir: /application
+    environment:
+     - MYSQL_ROOT_PASSWORD=demo
+     - MYSQL_DATABASE=demo
+     - MYSQL_USER=demo
+     - MYSQL_PASSWORD=demo
+    ports:
+     - "8002:3306"
+
+  webserver:
+    image: nginx:alpine
+    container_name: AdminLTE-webserver
+    working_dir: /application
+    ports:
+      - "8001:80"     
+networks:
+  back:
+volumes:
+  db_base:   
